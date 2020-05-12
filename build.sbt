@@ -15,7 +15,6 @@ scalacOptions ++= Seq(
 )
 
 val zioVersion = "1.0.0-RC18"
-val rdf4jVersion = "3.1.1"
 val scalatest = "3.0.3"
 libraryDependencies := Seq(
   "dev.zio" %% "zio" % zioVersion,

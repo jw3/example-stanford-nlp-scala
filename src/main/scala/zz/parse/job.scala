@@ -6,10 +6,10 @@ import zio.{IO, ZIO}
 
 import scala.io.Source
 
-object msg {
-  type MSGID = String
+object job {
+  type JobID = String
 
-  def id(file: File): Option[String] =
+  def id(file: File): Option[JobID] =
     Source
       .fromFile(file, "ISO-8859-1")
       .getLines
