@@ -1,12 +1,12 @@
 import zio.{Runtime, ZIO}
 import zz.parse.body.MessageBody.Report
 import zz.parse.{body, job, options}
-import zz.system.ZimZamSystem
+import zz.system.ZiZaSystem
 
 object main extends scala.App {
   val programArgs = options.parse(args)
 
-  val system = ZimZamSystem.make()
+  val system = ZiZaSystem.make()
   val deps = system
 
   val application = for {

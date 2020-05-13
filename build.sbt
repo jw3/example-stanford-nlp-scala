@@ -1,4 +1,4 @@
-name := "zimzam"
+name := "ziza"
 organization := "com.github.jw3"
 scalaVersion := "2.12.10"
 scalacOptions ++= Seq(
