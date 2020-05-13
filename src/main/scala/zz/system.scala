@@ -3,7 +3,7 @@ package zz
 import org.clulab.processors.Document
 import org.clulab.processors.corenlp.CoreNLPProcessor
 import zio._
-import zz.util.prep
+import zz.util.{merge, prep}
 
 import scala.util.Random
 
@@ -28,6 +28,7 @@ object system {
 
         def process(id: String, s: String): UIO[Document] = IO.effectAsync[Nothing, Document] { callback =>
           callback(IO.succeed(proc.annotate(s, keepText = true)).map { d =>
+            d.sentences.foreach(merge.inplace)
             d.id = Some(id)
             d
           })
@@ -35,6 +36,7 @@ object system {
 
         def process(id: String, s: Seq[String]): UIO[Document] = IO.effectAsync[Nothing, Document] { callback =>
           callback(IO.succeed(proc.annotateFromSentences(s, keepText = true)).map { d =>
+            d.sentences.foreach(merge.inplace)
             d.id = Some(id)
             d
           })
