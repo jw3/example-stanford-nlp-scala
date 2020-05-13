@@ -35,13 +35,7 @@ object system {
           }
         }
 
-        def process(id: String, s: String): UIO[Document] = IO.effectAsync[Nothing, Document] { callback =>
-          callback(IO.succeed(proc.annotate(s, keepText = true)).map { d =>
-            d.sentences.foreach(merge.inplace)
-            d.id = Some(id)
-            d
-          })
-        }
+        def process(id: String, s: String): UIO[Document] = process(id, Seq(s))
 
         def process(id: String, s: Seq[String]): UIO[Document] = IO.effectAsync[Nothing, Document] { callback =>
           callback(IO.succeed(proc.annotateFromSentences(s, keepText = true)).map { d =>
