@@ -37,3 +37,5 @@ dependsOn(
   ProjectRef(uri(s"git://github.com/clulab/processors.git#$procVer"), "corenlp"),
   ProjectRef(uri(s"git://github.com/clulab/processors.git#$procVer"), "odin")
 )
+
+unmanagedBase := file("/usr/local/zz/lib/")
