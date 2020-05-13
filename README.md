@@ -10,9 +10,17 @@ Some NLP with Zio and Stanford CoreNLP
 | CLU Lab NLP  | NLP support library; University of Arizona    | https://github.com/clulab     |
 
 
+### caseless models
+
+The system defaults to the caseless models which are found in the large corenlp models jar `stanford-english-corenlp-2018-10-05-models.jar`
+
+This jar can be placed under `lib` in the installation dir, which defaults to `/usr/local/zz`
+
+
 ### test data
 
 See the [data](data/) directory for subset of samples.  A GitLFS repo will be linked later.
+
 
 ### reference
 - https://github.com/stanfordnlp/CoreNLP
