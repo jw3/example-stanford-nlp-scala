@@ -1,3 +1,4 @@
+import rdf.implicits._
 import zio.{Runtime, ZIO}
 import zz.parse.body.MessageBody.Report
 import zz.parse.{body, job, options}
@@ -17,7 +18,7 @@ object main extends scala.App {
       msg <- ZIO.foreach(jobs)(x => body.z.parse(x._2).map(x._1 -> _))
       req = msg
         .filter { case (_, Report(_)) => true; case _ => false }
-        .map(x => zz.system.DocRequest(x._1, x._2.text))
+        .map(x => zz.system.DocRequest(x._1.getLocalName, x._2.text))
       _ <- in.offerAll(req)
     } yield {
       // todo;; debug
@@ -30,6 +31,7 @@ object main extends scala.App {
     // doc processing loop
     loop = for {
       d <- out.take
+      g = d.id.map(rdf.iri)
     } yield ()
 
     _ <- submit

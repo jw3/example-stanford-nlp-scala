@@ -29,8 +29,10 @@ libraryDependencies := Seq(
 
 enablePlugins(GitVersioning, JavaServerAppPackaging)
 
+val rdfzVer = "a08feb5407af69e2da83c3e47e45b32f043968e2"
 val procVer = "73553234718da558664e7f7c3c17f6363e987170" // 03-16-2020
 dependsOn(
+  ProjectRef(uri(s"git://github.com/jw3/rdfz.git#$rdfzVer"), "rdfz"),
   ProjectRef(uri(s"git://github.com/clulab/processors.git#$procVer"), "main"),
   ProjectRef(uri(s"git://github.com/clulab/processors.git#$procVer"), "corenlp"),
   ProjectRef(uri(s"git://github.com/clulab/processors.git#$procVer"), "odin")
