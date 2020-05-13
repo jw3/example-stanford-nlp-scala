@@ -1,5 +1,8 @@
 package zz
 
+import java.util.Properties
+
+import com.google.common.io.Resources
 import org.clulab.processors.Document
 import org.clulab.processors.corenlp.CoreNLPProcessor
 import zio._
@@ -24,7 +27,13 @@ object system {
 
     def make(): ZLayer.NoDeps[Nothing, ZiZaSystem] = ZLayer.succeed(
       new ZiZaSystem.Service {
-        private val proc = new CoreNLPProcessor(withRelationExtraction = true)
+        private val proc = new CoreNLPProcessor(withRelationExtraction = true) {
+          override protected def mkProperties(): Properties = {
+            val p = new Properties()
+            p.load(Resources.getResource("application.properties").openStream())
+            p
+          }
+        }
 
         def process(id: String, s: String): UIO[Document] = IO.effectAsync[Nothing, Document] { callback =>
           callback(IO.succeed(proc.annotate(s, keepText = true)).map { d =>
